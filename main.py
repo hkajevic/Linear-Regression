@@ -8,7 +8,7 @@ import seaborn as sb
 # Numpy za rad sa visedimenzionalnim nizovima
 import numpy as np
 
-# Ovo je nesto za ograniacvanje sirine
+# Ograniacvanje sirine
 pd.set_option('display.max_columns', 20)
 pd.set_option('display.max_rows', 20)
 pd.set_option('display.width', None)
@@ -96,11 +96,6 @@ X = data.drop(columns=['max_purchase_amount'])
 sc=StandardScaler()
 X_transform = sc.fit_transform(X)
 
-# weight_vector=np.random.randn(x.shape[1])
-# intercept=0
-# learning_rate = 0.001
-
-
 def predicted_y(weight, x, intercept):
     y_lst = []
     for i in range(len(x)):
@@ -108,7 +103,7 @@ def predicted_y(weight, x, intercept):
     return np.array(y_lst)
 
 
-# linear loss
+# linearni gubitak
 def loss(y, y_predicted):
     n = len(y)
     s = 0
@@ -117,7 +112,6 @@ def loss(y, y_predicted):
     return (1 / n) * s
 
 
-# derivative of loss w.r.t weight
 def dldw(x, y, y_predicted):
     s = 0
     n = len(y)
@@ -126,7 +120,7 @@ def dldw(x, y, y_predicted):
     return (2 / n) * s
 
 
-# derivative of loss w.r.t bias
+# izvod
 def dldb(y, y_predicted):
     n = len(y)
     s = 0
@@ -135,7 +129,7 @@ def dldb(y, y_predicted):
     return (2 / n) * s
 
 
-# gradient function
+# gradijentna funkcija
 def gradient_descent(x, y):
     weight_vector = np.random.randn(x.shape[1])
     intercept = 0
@@ -166,11 +160,6 @@ def predict(inp):
     for i in range(len(inp)):
         y_lst.append(w@inp[i]+b)
     return np.array(y_lst)
-# def meanSquaredError(arr1, arr2):
-#     sum = 0
-#     for i in range(len(arr1)):
-#         sum+= (arr1[i]-arr2[i])**2
-#     return sum*1.0/(2*len(arr1))
 
 y_pred=predict(X_transform)
 
@@ -220,41 +209,3 @@ reg.intercept_ = old_i
 print(reg.score(X_transform, Y))
 
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# allData = []
-# pom1 = max(X['gender']) / 400
-# pom2 = max(X['age']) / 400
-# pom3 = max(X['annual_salary']) / 400
-# pom4 = max(X['credit_card_debt']) / 400
-# pom5 = max(X['net_worth']) / 400
-#
-# for i in range(400):
-#     newList = [i*pom1, i*pom2, i*pom3, i*pom4, i*pom5]
-#     allData.append(newList)
-# sssss = pd.DataFrame(allData)
-# print('alllllllllllll')
-# print(sssss)
-# scc=StandardScaler()
-# for_ess = scc.fit_transform(sssss)
-# print('xxxxxxxxxxxxxx')
-# print(for_ess)
-# spots = 400
-# #estates = pd.DataFrame(data=np.linspace(0, 80000), num=spots))
-# estates = pd.DataFrame(data = np.linspace(0, 80000, num=spots))
-# plt.figure(1)
-# print(estates[0])
-# line, = plt.plot(estates[0], predict(for_ess), lw=5, c='red')
